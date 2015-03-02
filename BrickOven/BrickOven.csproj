@@ -241,6 +241,7 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\main.factory.js" />
     <Content Include="Scripts\app\main.ctrl.js" />
     <Content Include="Scripts\app\main.lib.js" />
     <Content Include="Scripts\app\app.js" />
