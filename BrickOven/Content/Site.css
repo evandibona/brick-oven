@@ -1,6 +1,6 @@
 ﻿body {
     background: url("/Content/patterns/tweed_2x.png") repeat;
-    color: white;
+    color: #abc; 
 }
 
 .header h1 {
