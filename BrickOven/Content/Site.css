@@ -1,0 +1,10 @@
+﻿body {
+    background: url("/Content/patterns/tweed_2x.png") repeat;
+    color: white;
+}
+
+.header h1 {
+    font-size: 5em;
+    font-weight: 700;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+}

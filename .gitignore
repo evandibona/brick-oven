@@ -1,0 +1,7 @@
+BrickOven/obj/*
+BrickOven/bin/*
+BrickOven/Scripts/i18n
+BrickOven/Scripts/angular*
+BrickOven/Scripts/jquery*
+BrickOven/Scripts/respond*
+packages/*
