@@ -11,13 +11,21 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="dropdown">
-                <p>{{main.factory}}</p>
+                <button class="btn btn-default dropdown-toggle" type="button" id="drop1" data-toggle="dropdown" aria-expanded="true">
+                    Year
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                    <li role="presentation" ng-repeat="year in main.years"><a role="menuitem" tabindex="-1" href="#">{{year}}</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="drop1" data-toggle="dropdown" aria-expanded="true">
                     Make
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">yourMake</a></li>
+                    <li role="presentation" ng-repeat="make in main.makes"><a role="menuitem" tabindex="-1" href="#">{{make}}</a></li>
                 </ul>
             </div>
         </div>

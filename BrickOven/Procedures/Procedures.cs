@@ -13,22 +13,22 @@ namespace BrickOven.Procedures
     public static class SP
     {
         public static string cxSTring = ConfigurationManager.ConnectionStrings[0].ToString();
-        public static string Execute(string sp)
+        public static List<string> Execute(string sp)
         {
-            var r = new DataSet();
+            var r = new List<string>(); 
             using (var cx = new SqlConnection("Server=LUCE\\SQLSERVER;Database=HCL2;Integrated Security=True"))
             {
                 using (var command = new SqlCommand(sp, cx) { CommandType = CommandType.StoredProcedure })
                 {
-                    cx.Open(); 
-                    var rdr = command.ExecuteReader();
+                    cx.Open();
+                    var rdr = command.ExecuteReader(); 
                     while (rdr.Read())
                     {
-                        var a = rdr[0]; 
+                        r.Add(rdr[0].ToString());
                     }
                 }
             }
-            return r.ToString();
+            return r; 
         }
     }
 }

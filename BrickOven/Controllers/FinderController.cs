@@ -12,18 +12,21 @@ namespace BrickOven.Controllers
     {
         // POST: api/finder
         [HttpPost]
-        public Dictionary<string,string[]> Post(string id)
+        public List<string> Post(string id)
         {
-            var a = SP.Execute("dbo.GetYears"); 
+            List<string> a = SP.Execute("dbo.GetYears");
             switch (id)
             {
                 case "years":
-
+                    a = SP.Execute("dbo.GetYears");
+                    break; 
+                case "makes":
+                    a = SP.Execute("dbo.GetBrands");
+                    break; 
                 default:
                     break;
             }
-            var d = new Dictionary<string, string[]>();
-            return d; 
+            return a; 
         }
     }
 }
