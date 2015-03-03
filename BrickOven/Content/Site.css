@@ -3,12 +3,12 @@
     color: #fff; 
 }
 ::selection {
-    color: #2980b9; 
-    background: #34495e; 
+    color: #ecf0f1; 
+    background: #f1c40f; 
 }
 ::-moz-selection {
-    color: #34495e; 
-    background: #2980b9; 
+    color: #ecf0f1; 
+    background: #f1c40f; 
 }
 
 .header {
@@ -48,4 +48,9 @@ hr {
     height: 5px; 
     border-top: 1px solid #ccc; 
     border-bottom: 1px solid #ccc; 
+}
+
+.table-clickable thead tr th {
+    cursor: pointer; 
+    width: 5em; 
 }
