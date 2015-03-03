@@ -3,27 +3,37 @@
         <div class="col-sm-12">
         </div>
     </div>
-    <p>{{main.info}}</p>
     <div class="row">
         <div class="col-sm-12">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="drop1" data-toggle="dropdown" aria-expanded="true">
-                    Year
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                    <li role="presentation" ng-repeat="year in main.years"><a role="menuitem" tabindex="-1" href="#">{{year}}</a></li>
-                </ul>
-            </div>
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="drop1" data-toggle="dropdown" aria-expanded="true">
-                    Make
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                    <li role="presentation" ng-repeat="make in main.makes"><a role="menuitem" tabindex="-1" href="#">{{make}}</a></li>
-                </ul>
-            </div>
+            <table class="table table-clickable">
+                <thead>
+                    <tr>
+                        <th> 
+                            <div ng-show="!main.headsel[0]"> Make </div>
+                            <input type="text" class="form-control" 
+                                   ng-show="main.headsel[0]" />
+                        </th>
+                        <th> 
+                            <div ng-show="main.headsel[1]"> Year </div>
+                            <input type="text" class="form-control" />
+                        </th>
+                        <th ng-click="main.select(0)"> Model </th>
+                        <th> Body Style </th>
+                        <th> Seats </th>
+                        <th> Fuel </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="car in main.cars">
+                        <td> {{car["make"]}}</td>
+                        <td> {{car["year"]}}</td>
+                        <td> {{car["model"]}}</td>
+                        <td> {{car["body"]}}</td>
+                        <td> {{car["seats"]}}</td>
+                        <td> {{car["fuel"]}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
