@@ -12,16 +12,14 @@ namespace BrickOven.Controllers
     {
         // POST: api/finder
         [HttpPost]
-        public List<string> Post(string id)
+        public Dictionary<string,string> Post(Dictionary<string,string> data)
         {
-            List<string> a = SP.Execute("dbo.GetYears");
-            switch (id)
+            var a = Cars.Car("2000"); 
+            switch ("")
             {
                 case "years":
-                    a = SP.Execute("dbo.GetYears");
                     break; 
                 case "makes":
-                    a = SP.Execute("dbo.GetBrands");
                     break; 
                 default:
                     break;
