@@ -12,11 +12,11 @@ namespace BrickOven.Procedures
 {
     public static class SP
     {
-        public static string cxSTring = ConfigurationManager.ConnectionStrings[0].ToString();
+        private static string cxSTring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; 
         public static List<string> Execute(string sp)
         {
             var r = new List<string>(); 
-            using (var cx = new SqlConnection("Server=LUCE\\SQLSERVER;Database=HCL2;Integrated Security=True"))
+            using (var cx = new SqlConnection(cxSTring)) 
             {
                 using (var command = new SqlCommand(sp, cx) { CommandType = CommandType.StoredProcedure })
                 {
