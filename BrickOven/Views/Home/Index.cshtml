@@ -11,14 +11,16 @@
                         <tr>
                             <th ng-repeat="trait in main.traits">
                                 <!--<form ng-submit="main.filter = main.makeFilter(main.traits)">-->
-                                <div ng-show="!trait.view" class="capital"
+                                <div class="capital"
                                      ng-click="main.select(trait)">
-                                    <p>{{trait.name}}</p>
-                                    <p><i>{{trait.value}}</i></p>
+                                    {{trait.name}}
                                 </div>
-                                <input type="text" class="form-control"
-                                       ng-show="trait.view"
-                                       ng-model="trait.val" />
+                                <input type="text" class="textbox-camo form-control"
+                                       ng-model="trait.val" 
+                                       ng-options="x for x in main[trait.mid + 's']"
+                                       placeholder="Enter a Year"
+                                       bs-typeahead 
+                                       />
                             </th>
                         </tr>
                     </thead>
@@ -33,5 +35,11 @@
             <p>{{main.traits}}</p>
             <p>{{main.filter}}</p>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-3">
     </div>
 </div>

@@ -1,1 +1,1 @@
-﻿angular.module("BrickOven", []) 
+﻿angular.module("BrickOven", ['mgcrea.ngStrap']) 

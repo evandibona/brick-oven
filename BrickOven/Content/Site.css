@@ -57,3 +57,32 @@ hr {
     width: 5em; 
 }
 
+input.textbox-camo {
+    width: 100%; 
+    height: 34px; 
+    padding: 6px 12px; 
+    font-size: 15px; 
+    font-weight: 700; 
+
+    color: white; 
+    background-color: rgba(0,0,0,0); 
+    border: 1px solid #bbb; 
+}
+
+input.textbox-camo:focus {
+    background-color: #555; 
+}
+
+ul.typeahead {
+    background: #333; 
+}
+ul.typeahead a {
+    color: white; 
+}
+.dropdown-menu > .active > a, 
+.dropdown-menu > .active > a:hover, 
+.dropdown-menu > .active > a:focus, 
+ul.typeahead a:hover  {
+    background: white; 
+    color: #333; 
+}
