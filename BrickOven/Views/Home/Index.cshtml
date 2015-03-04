@@ -11,8 +11,11 @@
                         <th ng-repeat="trait in main.traits"> 
                             <div ng-show="!trait[1]" class="capital"
                                  ng-click="main.select($index)"> {{trait[2]}} </div>
-                            <input type="text" class="form-control" id="{{trait[0]}}" 
-                                   ng-show="trait[1]" />
+                            <input type="text" class="form-control" 
+                                   id="trait-{{trait[0]}}" 
+                                   ng-show="trait[1]" 
+                                   ng-model="trait[3]"
+                                   />
                         </th>
                     </tr>
                 </thead>
@@ -22,6 +25,7 @@
                     </tr>
                 </tbody>
             </table>
+            <p>{{main.traits}}</p>
         </div>
     </div>
 </div>

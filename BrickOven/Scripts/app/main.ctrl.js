@@ -10,12 +10,12 @@
         vm.years = ["Years couldn't load"]
         vm.makes = ["Makes couldn't load"]
         vm.traits = [
-            ["make", false, "Make"], 
-            ["model", false, "Model"], 
-            ["seats", false, "Seats"], 
-            ["year", false, "Year"], 
-            ["body", false, "Body Type"], 
-            ["fuel", false, "Fuel"], 
+            ["make", false, "Make",     ""], 
+            ["model", false, "Model",   ""], 
+            ["seats", false, "Seats",   ""], 
+            ["year", false, "Year",     ""], 
+            ["body", false, "Body Type",""], 
+            ["fuel", false, "Fuel",     ""], 
         ]
         vm.cars = [
             { make: "Shiny", model: "Rocket", seats: "18", year: "1950", body: "Rocket Shaped", fuel: "Lots of It." },
