@@ -67,10 +67,16 @@ input.textbox-camo {
     color: white; 
     background-color: rgba(0,0,0,0); 
     border: 1px solid #bbb; 
+
+    border-radius: 5px; 
 }
 
 input.textbox-camo:focus {
     background-color: #555; 
+}
+
+input.textbox-camo::-moz-placeholder {
+    color: #999; 
 }
 
 ul.typeahead {

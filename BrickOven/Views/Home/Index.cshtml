@@ -15,10 +15,10 @@
                                      ng-click="main.select(trait)">
                                     {{trait.name}}
                                 </div>
-                                <input type="text" class="textbox-camo form-control"
+                                <input type="text" class="textbox-camo "
                                        ng-model="trait.val" 
                                        ng-options="x for x in main[trait.mid + 's']"
-                                       placeholder="Enter a Year"
+                                       placeholder="Enter a {{trait.name}}"
                                        bs-typeahead 
                                        />
                             </th>
@@ -32,8 +32,6 @@
                 </table>
                 <input type="submit" style="position: absolute; left: -9999px"/> <!-- Keep button outside the view. -->
             </form>
-            <p>{{main.traits}}</p>
-            <p>{{main.filter}}</p>
         </div>
     </div>
 </div>
