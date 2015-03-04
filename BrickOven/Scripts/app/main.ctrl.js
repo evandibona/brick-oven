@@ -4,9 +4,10 @@
         .module('BrickOven')
         .controller('CarController', carController);
 
-    function carController($http, BrickFactory) {
+    function carController($http, propList) {
         var vm = this
-        vm.years = ["Years couldn't load"]
+        console.log(propList)
+        vm.years = []
         vm.makes = ["Makes couldn't load"]
         vm.traits = [
             { mid: "make", view: false, name: "Make", val: "" },
