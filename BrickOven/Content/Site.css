@@ -11,6 +11,8 @@
     background: #f1c40f; 
 }
 
+.capitol { text-transform: capitalize; }
+
 .header {
     margin: 1em; 
     padding: 1em; 
@@ -54,3 +56,4 @@ hr {
     cursor: pointer; 
     width: 5em; 
 }
+
