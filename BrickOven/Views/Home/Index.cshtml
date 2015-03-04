@@ -5,27 +5,30 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <table class="table table-clickable">
-                <thead>
-                    <tr>
-                        <th ng-repeat="trait in main.traits"> 
-                            <div ng-show="!trait[1]" class="capital"
-                                 ng-click="main.select($index)"> {{trait[2]}} </div>
-                            <input type="text" class="form-control" 
-                                   id="trait-{{trait[0]}}" 
-                                   ng-show="trait[1]" 
-                                   ng-model="trait[3]"
-                                   />
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="car in main.cars">
-                        <td ng-repeat="trait in main.traits"> {{car[trait[0]]}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <form ng-submit="clearTraits()">
+                <table class="table table-clickable">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="trait in main.traits">
+                                <!--<form ng-submit="main.filter = main.makeFilter(main.traits)">-->
+                                <div ng-show="!trait[1]" class="capital"
+                                     ng-click="main.select($index)">{{trait[2]}}</div>
+                                <input type="text" class="form-control"
+                                       id="trait-{{trait[0]}}"
+                                       ng-show="trait[1]"
+                                       ng-model="trait[3]" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="car in main.cars">
+                            <td ng-repeat="trait in main.traits"> {{car[trait[0]]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
             <p>{{main.traits}}</p>
+            <p>{{main.filter}}</p>
         </div>
     </div>
 </div>
