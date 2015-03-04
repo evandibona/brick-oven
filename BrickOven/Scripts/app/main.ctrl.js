@@ -1,12 +1,5 @@
 ﻿(function () {
     'use strict'
-
-    function ForEach(ary, action) {
-        for (var i in ary) {
-            action(ary[i])
-        }
-    }
-
     angular
         .module('BrickOven')
         .controller('CarController', carController);
@@ -17,36 +10,43 @@
         vm.years = ["Years couldn't load"]
         vm.makes = ["Makes couldn't load"]
         vm.traits = [
-            ["make", false, "Make", ""],
-            ["model", false, "Model", ""],
-            ["seats", false, "Seats", ""],
-            ["year", false, "Year", ""],
-            ["body", false, "Body Type", ""],
-            ["fuel", false, "Fuel", ""],
+            { mid: "make", view: false, name: "Make", val: "" },
+            { mid: "model", view: false, name: "Model", val: "" },
+            { mid: "seats", view: false, name: "Seats", val: "" },
+            { mid: "year", view: false, name: "Year", val: "" },
+            { mid: "body", view: false, name: "Body Type", val: "" },
+            { mid: "fuel", view: false, name: "Fuel", val: "" },
         ]
         vm.cars = [
             { make: "Shiny", model: "Rocket", seats: "18", year: "1950", body: "Rocket Shaped", fuel: "Lots of It." },
             { make: "Buggy", model: "Smithfield Co.", seats: "2", year: "1750", body: "Horse shoe", fuel: "Horses." },
         ]
-        vm.filter = []
+        vm.filter = {}
         vm.makeFilter = function (traits) {
-            var filter = []
-            ForEach(traits, function (e) {
-                if (e[3].length > 0) {
-                    var a = e[0]
-                    filter += { a: e[3] }
+            var f = {}
+            angular.forEach(traits, function (trait) {
+                if (trait.val.length > 0) {
+                    f[trait.mid] = trait.val
                 }
             })
-            return filter
+            return f
         }
-        vm.clearTraits = function() {
-            for (var i in vm.traits) {
-                vm.traits[i][1] = false
-            }
+        vm.fillTraits = function (prop, def) {
+            angular.forEach(vm.traits, function (t) {
+                t[prop] = def
+            })
         }
-        vm.select = function (i) {
-            vm.clearTraits()
-            vm.traits[i][1] = true
+        vm.reset = function () {
+            vm.fillTraits('view', false)
+            vm.fillTraits('val', '')
+        }
+        vm.select = function (a) {
+            vm.fillTraits("view", false)
+            a.view = true
+        }
+        vm.submitFilter = function () {
+            vm.filter = vm.makeFilter(vm.traits) 
+            vm.reset()
         }
     }
 })()
