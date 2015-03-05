@@ -6,8 +6,9 @@
 
     function carController($http, propList) {
         var vm = this
-        console.log(propList)
         vm.years = []
+        propList.then(function(a) {vm.years = a['data']})
+        console.log(vm.years)
         vm.makes = ["Makes couldn't load"]
         vm.traits = [
             { mid: "make", view: false, name: "Make", val: "" },

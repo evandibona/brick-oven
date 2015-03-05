@@ -6,14 +6,14 @@
         .factory('propList', propList)
 
     function propList($http) {
-        var lym = []
-        $http.get("/api/finder/years")
+        var li = []
+        var promise = $http.get("/api/finder/years")
             .success(function (data) {
-                lym = data
+                return data
             })
             .error(function (data, status, headers, config) {
-                lym = data, status
+                return data, status
             })
-        return lym 
+        return promise
     }
 })()
