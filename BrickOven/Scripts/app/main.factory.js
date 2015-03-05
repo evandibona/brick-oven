@@ -6,13 +6,14 @@
         .factory('propList', propList)
 
     function propList($http) {
-        var list = $http.post("/api/finder/years", { n: "nothing" })
-            .success(function (data, status, headers, config) {
-                vm.years = data
+        var lym = []
+        $http.get("/api/finder/years")
+            .success(function (data) {
+                lym = data
             })
             .error(function (data, status, headers, config) {
-                Console.log("Error!!", data)
+                lym = data, status
             })
-        return list
+        return lym 
     }
 })()

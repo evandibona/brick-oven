@@ -11,13 +11,14 @@ namespace BrickOven.Controllers
     public class FinderController : ApiController
     {
         // POST: api/finder
-        [HttpPost]
-        public Dictionary<string,string> Post(Dictionary<string,string> data)
+        public string[] Get(string id)
         {
-            var a = Cars.Car("2000"); 
-            switch ("")
+            var label = id; 
+            var a = new string[] { "Move along, nothing to see here." }; 
+            switch (label)
             {
                 case "years":
+                    a = Cars.UniquesByProperty("model_year").ToArray(); 
                     break; 
                 case "makes":
                     break; 
