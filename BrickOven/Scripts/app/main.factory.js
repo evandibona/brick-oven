@@ -8,17 +8,13 @@
     carApi.$inject = ['$http']
 
     function carApi($http) {
-        function req(prp) {
-            return $http.get("/api/finder/" + prp)
-               .success(function (data) {
-                   return data
-               })
-                .then(function (a) {
-                    return a['data'] 
-                })
-        }
         return {
-            list: req
+            list: function (prp) {
+                return $http.get("/api/finder/" + prp)
+                    .then(function (a) {
+                        return a['data']
+                    })
+            }
         }
     }
 })()
