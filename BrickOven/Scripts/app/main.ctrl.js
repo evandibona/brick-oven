@@ -4,12 +4,10 @@
         .module('BrickOven')
         .controller('CarController', carController);
 
-    function carController($http, propList) {
+    function carController($http, carApi) {
         var vm = this
-        vm.years = []
-        propList.then(function(a) {vm.years = a['data']})
-        console.log(vm.years)
-        vm.makes = ["Makes couldn't load"]
+        vm.years = carApi.list("years") 
+        vm.makes = carApi.list("makes") 
         vm.traits = [
             { mid: "make", view: false, name: "Make", val: "" },
             { mid: "model", view: false, name: "Model", val: "" },
@@ -17,7 +15,7 @@
             { mid: "year", view: false, name: "Year", val: "" },
             { mid: "body", view: false, name: "Body Type", val: "" },
             { mid: "fuel", view: false, name: "Fuel", val: "" },
-        ]
+        ] // simplify this 
         vm.filter = {}
         vm.makeFilter = function (traits) {
             var f = {}

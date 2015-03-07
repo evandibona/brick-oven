@@ -3,17 +3,22 @@
 
     angular
         .module('BrickOven')
-        .factory('propList', propList)
+        .factory('carApi', carApi)
 
-    function propList($http) {
-        var li = []
-        var promise = $http.get("/api/finder/years")
-            .success(function (data) {
-                return data
-            })
-            .error(function (data, status, headers, config) {
-                return data, status
-            })
-        return promise
+    carApi.$inject = ['$http']
+
+    function carApi($http) {
+        function req(prp) {
+            return $http.get("/api/finder/" + prp)
+               .success(function (data) {
+                   return data
+               })
+                .then(function (a) {
+                    return a['data'] 
+                })
+        }
+        return {
+            list: req
+        }
     }
 })()

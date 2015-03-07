@@ -14,18 +14,19 @@ namespace BrickOven.Controllers
         public string[] Get(string id)
         {
             var label = id; 
-            var a = new string[] { "Move along, nothing to see here." }; 
+            var data = new string[] { "Move along, nothing to see here." }; 
             switch (label)
             {
                 case "years":
-                    a = Cars.UniquesByProperty("model_year").ToArray(); 
+                    data = Cars.UniquesByProperty("model_year").ToArray(); 
                     break; 
                 case "makes":
+                    data = Cars.UniquesByProperty("make").ToArray(); 
                     break; 
                 default:
                     break;
             }
-            return a; 
+            return data; 
         }
     }
 }
