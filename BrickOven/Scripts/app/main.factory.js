@@ -8,13 +8,18 @@
     carApi.$inject = ['$http']
 
     function carApi($http) {
-        return {
-            list: function (prp) {
-                return $http.get("/api/finder/" + prp)
-                    .then(function (a) {
-                        return a['data']
-                    })
-            }
+        var apiParts = {
+            list: listProperty
+        }
+        return apiParts
+        ///////////////
+
+        function listProperty(prp) {
+            return $http.get("/api/finder/" + prp)
+            .then(function (d) {
+                console.log(d.data) 
+                return d.data 
+            })
         }
     }
 })()

@@ -6,7 +6,7 @@
 
     function carController($http, carApi) {
         var vm = this
-        console.log( carApi.list("years")) 
+        console.log( carApi.list("makes"), 'outside') 
         vm.makes = carApi.list("makes")
         vm.years = carApi.list("years") 
         vm.traits = [
