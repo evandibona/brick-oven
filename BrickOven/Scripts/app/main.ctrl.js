@@ -14,23 +14,21 @@
             { id: "bodyStyle", name: "Body Type" },
             { id: "engineFuel", name: "Fuel" },
         ]
+        // Generate Dropdown Lists //
         angular.forEach(vm.traits, function (e) {
             carApi.list(e.id, vm)
         })
-        /*
-        vm.filter = {}
-        vm.makeFilter = function (traits) {
-            var f = {}
-            angular.forEach(traits, function (trait) {
-                f[trait.sql] = trait.val
+        vm.cars = [ {"make": "No Cars Are Loaded", "engineFuel": "Pure Ovaltine"}]
+        ///////////////////////////
+        vm.loadCars = function (maxLength) {
+            var apiCall = {}
+            angular.forEach(vm.traits, function (e) {
+                if ((e.val != undefined ) && ( e.val.length > 0 )) {
+                    var sqlId = carApi.camel('stretch', e.id) 
+                    apiCall[sqlId] = e.val
+                }
             })
-            return f
+            carApi.cars(apiCall, vm)
         }
-        vm.submitFilter = function () {
-            vm.filter = vm.makeFilter(vm.traits)
-        }
-        */
-
-
     }
 })()

@@ -10,10 +10,19 @@ namespace BrickOven.Controllers
 {
     public class FinderController : ApiController
     {
-        // POST: api/finder
+        // GET: api/finder
         public string[] Get(string id)
         {
             return Cars.UniquesByProperty(id).ToArray();
+        }
+        // POST
+        public Dictionary<string,string> Post(Dictionary<string, string> data)
+        {
+            foreach (var item in data)
+            {
+
+            }
+            return data; 
         }
     }
 }

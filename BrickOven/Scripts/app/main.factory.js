@@ -9,20 +9,26 @@
 
     function carApi($http) {
         var apiParts = {
-            list: listProperty
+            list: listProperty,
+            cars: getCarList,
+            camel: camel, 
         }
         return apiParts
         ///////////////
 
         function listProperty(prp, vm) {
-            var sql = camel('stretch', prp )
+            var sql = camel('stretch', prp)
             $http.get("/api/finder/" + sql)
             .then(function (d) {
-                vm[prp] = d.data 
+                vm[prp] = d.data
             })
         }
-
-        /////////
+        function getCarList(params, vm) {
+            $http.post("/api/finder/", params)
+            .then(function (a) {
+                console.log(a)
+            })
+        }
         function camel(action, str) {
             var a = action.toLowerCase()
             if (a == 'squish') {
