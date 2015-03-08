@@ -10,14 +10,13 @@
                     <thead>
                         <tr>
                             <th ng-repeat="trait in main.traits">
-                                <!--<form ng-submit="main.filter = main.makeFilter(main.traits)">-->
                                 <div class="capital"
                                      ng-click="main.select(trait)">
                                     {{trait.name}}
                                 </div>
                                 <input type="text" class="textbox-camo "
                                        ng-model="trait.val"
-                                       ng-options="x for x in main[trait.mid + 's']"
+                                       ng-options="x for x in main[trait.id]"
                                        placeholder="Enter a {{trait.name}}"
                                        bs-typeahead />
                             </th>
@@ -25,7 +24,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="car in main.cars">
-                            <td ng-repeat="trait in main.traits"> {{car[trait.mid]}}</td>
+                            <td ng-repeat="trait in main.traits"> {{car[trait.id]}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -35,6 +34,8 @@
     </div>
     <div class="row">
         <div class="col-sm-3">
+            {{main.traits}}
+            {{main.seats}}
         </div>
         <div class="col-sm-3">
         </div>
