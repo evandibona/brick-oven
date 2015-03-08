@@ -6,42 +6,64 @@
 
     function carController($http, carApi) {
         var vm = this
-        console.log( carApi.list("makes"), 'outside') 
-        vm.makes = carApi.list("makes")
-        vm.years = carApi.list("years") 
         vm.traits = [
-            { mid: "make", view: false, name: "Make", val: "" },
-            { mid: "model", view: false, name: "Model", val: "" },
-            { mid: "seats", view: false, name: "Seats", val: "" },
-            { mid: "year", view: false, name: "Year", val: "" },
-            { mid: "body", view: false, name: "Body Type", val: "" },
-            { mid: "fuel", view: false, name: "Fuel", val: "" },
-        ] // simplify this 
+            { sql: "make", name: "Make" },
+            { sql: "model_name", name: "Model" },
+            { sql: "seats", name: "Seats" },
+            { sql: "model_year", name: "Year" },
+            { sql: "body_style", name: "Body Type" },
+            { sql: "engine_fuel", name: "Fuel" },
+        ]
+        angular.forEach(vm.traits, function (e) {
+            carApi.list(e.sql, vm)
+        })
+        console.log(vm.make)
+        console.log(vm.model_name)
+        console.log(vm.make)
+        console.log(vm.make)
+        /*
         vm.filter = {}
         vm.makeFilter = function (traits) {
             var f = {}
             angular.forEach(traits, function (trait) {
-                if (trait.val.length > 0) {
-                    f[trait.mid] = trait.val
-                }
+                f[trait.sql] = trait.val
             })
             return f
         }
-        vm.fillTraits = function (prop, def) {
-            angular.forEach(vm.traits, function (t) {
-                t[prop] = def
-            })
-        }
-        vm.reset = function () {
-            vm.fillTraits('view', false)
-            vm.fillTraits('val', '')
-        }
-        vm.select = function (a) {
-            vm.fillTraits("view", false)
-            a.view = true
-        }
         vm.submitFilter = function () {
-            vm.filter = vm.makeFilter(vm.traits) 
+            vm.filter = vm.makeFilter(vm.traits)
         }
+        */
+        function camel(action, str) {
+            var a = action.toLowerCase()
+            if (a == 'squish') {
+                var d = str.split('_')
+                var o = ""
+                // factor into a foreach
+                for (var i in d) {
+                    var e = d[i].toLowerCase()
+                    if (i != 0) {
+                        o += capitalize(e)
+                    }
+                    if (i == 0) {
+                        o += e
+                    }
+                }
+                return o
+            }
+            if (a == 'stretch') {
+                var ary = str.split(/(?=[A-Z])/)
+                for (var i in ary) {
+                    ary[i] = ary[i].toLowerCase()
+                }
+                return ary.join("_")
+            }
+            return "Incorrect action was used."
+            function capitalize(str) {
+                return str[0].toUpperCase() + str.slice(1)
+            }
+        }
+
+
     }
 })()

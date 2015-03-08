@@ -14,11 +14,11 @@
         return apiParts
         ///////////////
 
-        function listProperty(prp) {
-            return $http.get("/api/finder/" + prp)
+        function listProperty(prp, vm) {
+            $http.get("/api/finder/" + prp)
             .then(function (d) {
-                console.log(d.data) 
-                return d.data 
+                vm[prp] = d.data 
+                console.log(vm[prp])
             })
         }
     }
