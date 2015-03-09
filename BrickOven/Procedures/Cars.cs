@@ -44,21 +44,34 @@ namespace BrickOven.Procedures
             };
             return SpToList("dbo.GetProperty", ps);
         }
-        public static List<string> Cars(string max, Dictionary<string, string> filter)
+        public static List<Dictionary<string,string>> CarList(string max, Dictionary<string, string> filter)
         {
-            string whereClause = "WHERE "; 
-            var lst = new List<string>(); 
+            string whereClause = "WHERE ";
+            var lst = new List<string>();
             foreach (var item in filter)
             {
-                lst.Add(item.Key + "=" + "'" + item.Value + "'"); 
+                lst.Add(item.Key + "=" + "'" + item.Value + "'");
             }
             whereClause += string.Join(" AND ", lst);
 
             var pts = new Dictionary<string, string>() {
                 {"@max", max }, 
                 {"@conditions", whereClause } 
-            }; 
-            return new
+            };
+            var colNames = SpToList("dbo.GetColumns", new Dictionary<string, string>()); 
+            var rows = SpRows("dbo.GetCars", pts);
+            var outData = new List<Dictionary<string, string>>(); 
+            foreach (var row in rows)
+            {
+                var count = colNames.Count - 2;
+                var rowDict = new Dictionary<string, string>(); 
+                for (int i = 0; i < count; i++)
+                {
+                    rowDict.Add(colNames[i], row[i]); 
+                }
+                outData.Add(rowDict); 
+            }
+            return outData;
         }
         private static List<string> SpToList(string sp, Dictionary<string, string> ps)
         {
@@ -70,9 +83,9 @@ namespace BrickOven.Procedures
                     var command = new SqlCommand(sp, cx) { CommandType = CommandType.StoredProcedure };
                     foreach (var pair in ps)
                     {
-                        var key = pair.Key.ToString(); 
+                        var key = pair.Key.ToString();
                         var val = pair.Value.ToString();
-                        command.Parameters.Add(new SqlParameter(key, val)); 
+                        command.Parameters.Add(new SqlParameter(key, val));
                     }
                     using (command)
                     {
@@ -80,16 +93,16 @@ namespace BrickOven.Procedures
                         var rdr = command.ExecuteReader();
                         while (rdr.Read())
                         {
-                            li.Add(rdr[0].ToString()); 
+                            li.Add(rdr[0].ToString());
                         }
                     }
                 }
             }
             return li;
         }
-        private static Dictionary<string,string> SpRows(string sp, Dictionary<string, string> ps)
+        private static List<List<string>> SpRows(string sp, Dictionary<string, string> ps)
         {
-            var li = new List<string>();
+            var li = new List<List<string>>();
             if (sp.Length > 0)
             {
                 using (var cx = new SqlConnection(cxSTring))
@@ -97,17 +110,24 @@ namespace BrickOven.Procedures
                     var command = new SqlCommand(sp, cx) { CommandType = CommandType.StoredProcedure };
                     foreach (var pair in ps)
                     {
-                        var key = pair.Key.ToString(); 
+                        var key = pair.Key.ToString();
                         var val = pair.Value.ToString();
-                        command.Parameters.Add(new SqlParameter(key, val)); 
+                        command.Parameters.Add(new SqlParameter(key, val));
                     }
                     using (command)
                     {
                         cx.Open();
                         var rdr = command.ExecuteReader();
+                        var q = rdr.Read();
                         while (rdr.Read())
                         {
-                            li.Add(rdr[0].ToString()); 
+                            var row = new List<string>(); 
+                            var len = rdr.FieldCount - 1;
+                            for (int i = 0; i < len; i++)
+                            {
+                                row.Add(rdr[i].ToString()); 
+                            }
+                            li.Add(row); 
                         }
                     }
                 }

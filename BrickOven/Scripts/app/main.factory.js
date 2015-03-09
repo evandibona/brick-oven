@@ -11,53 +11,22 @@
         var apiParts = {
             list: listProperty,
             cars: getCarList,
-            camel: camel, 
         }
         return apiParts
         ///////////////
 
-        function listProperty(prp, vm) {
-            var sql = camel('stretch', prp)
-            $http.get("/api/finder/" + sql)
+        function listProperty(t, vm) {
+            $http.get("/api/finder/" + t.lid)
             .then(function (d) {
-                vm[prp] = d.data
+                vm[t.id] = d.data
             })
         }
         function getCarList(params, vm) {
             $http.post("/api/finder/", params)
-            .then(function (a) {
-                console.log(a)
+            .then(function (d) {
+                vm.cars = d.data
+                console.log(d.data)
             })
-        }
-        function camel(action, str) {
-            var a = action.toLowerCase()
-            if (a == 'squish') {
-                var d = str.split('_')
-                var o = ""
-                // factor into a foreach
-                for (var i in d) {
-                    var e = d[i].toLowerCase()
-                    if (i != 0) {
-                        o += capitalize(e)
-                    }
-                    if (i == 0) {
-                        o += e
-                    }
-                }
-                return o
-            }
-            if (a == 'stretch') {
-                var ary = str.split(/(?=[A-Z])/)
-                for (var i in ary) {
-                    ary[i] = ary[i].toLowerCase()
-                }
-                return ary.join("_")
-            }
-            return "Incorrect action was used."
-            //////////////////////
-            function capitalize(str) {
-                return str[0].toUpperCase() + str.slice(1)
-            }
         }
     }
 })()
