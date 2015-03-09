@@ -28,6 +28,7 @@
                     apiCall[sqlId] = e.val
                 }
             })
+            apiCall["max"] = maxLength 
             carApi.cars(apiCall, vm)
         }
     }

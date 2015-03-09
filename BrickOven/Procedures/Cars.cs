@@ -44,6 +44,22 @@ namespace BrickOven.Procedures
             };
             return SpToList("dbo.GetProperty", ps);
         }
+        public static List<string> Cars(string max, Dictionary<string, string> filter)
+        {
+            string whereClause = "WHERE "; 
+            var lst = new List<string>(); 
+            foreach (var item in filter)
+            {
+                lst.Add(item.Key + "=" + "'" + item.Value + "'"); 
+            }
+            whereClause += string.Join(" AND ", lst);
+
+            var pts = new Dictionary<string, string>() {
+                {"@max", max }, 
+                {"@conditions", whereClause } 
+            }; 
+            return new
+        }
         private static List<string> SpToList(string sp, Dictionary<string, string> ps)
         {
             var li = new List<string>();
@@ -54,7 +70,33 @@ namespace BrickOven.Procedures
                     var command = new SqlCommand(sp, cx) { CommandType = CommandType.StoredProcedure };
                     foreach (var pair in ps)
                     {
-                        //command.Parameters.Add(new SqlParameter(param.Keys.ToList()[0], param.Values.ToList()[0]));
+                        var key = pair.Key.ToString(); 
+                        var val = pair.Value.ToString();
+                        command.Parameters.Add(new SqlParameter(key, val)); 
+                    }
+                    using (command)
+                    {
+                        cx.Open();
+                        var rdr = command.ExecuteReader();
+                        while (rdr.Read())
+                        {
+                            li.Add(rdr[0].ToString()); 
+                        }
+                    }
+                }
+            }
+            return li;
+        }
+        private static Dictionary<string,string> SpRows(string sp, Dictionary<string, string> ps)
+        {
+            var li = new List<string>();
+            if (sp.Length > 0)
+            {
+                using (var cx = new SqlConnection(cxSTring))
+                {
+                    var command = new SqlCommand(sp, cx) { CommandType = CommandType.StoredProcedure };
+                    foreach (var pair in ps)
+                    {
                         var key = pair.Key.ToString(); 
                         var val = pair.Value.ToString();
                         command.Parameters.Add(new SqlParameter(key, val)); 
