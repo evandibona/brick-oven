@@ -16,11 +16,15 @@ namespace BrickOven.Controllers
             return Cars.UniquesByProperty(id).ToArray();
         }
         // POST
-        public List<Dictionary<string,string>> Post(Dictionary<string, string> data)
+        public List<Dictionary<string, string>> Post(Dictionary<string, string> data)
         {
-            string maxLength = data["max"];
-            data.Remove("max");
-            return Cars.CarList(maxLength, data); 
+            var maxLength = "20";
+            if (data.ContainsKey("max"))
+            {
+                maxLength = data["max"];
+                data.Remove("max");
+            }
+            return Cars.CarList(maxLength, data);
         }
     }
 }

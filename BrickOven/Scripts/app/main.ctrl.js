@@ -14,11 +14,12 @@
             { id: "bodyStyle", name: "Body Type" },
             { id: "engineFuel", name: "Fuel" },
         ]
+        // traits sql Id, Generate //
         for (var i = 0; i < vm.traits.length; i++) {
             var e = vm.traits[i]
             e['lid'] = camel('stretch', e.id)
         }
-        // Generate Dropdown Lists //
+        // Dropdown Lists, Generate //
         angular.forEach(vm.traits, function (e) {
             carApi.list(e, vm)
         })

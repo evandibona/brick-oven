@@ -22,10 +22,10 @@
             })
         }
         function getCarList(params, vm) {
+            console.log(params) 
             $http.post("/api/finder/", params)
             .then(function (d) {
                 vm.cars = d.data
-                console.log(d.data)
             })
         }
     }
