@@ -1,6 +1,25 @@
-﻿body {
+﻿@font-face { font-family: "Kaushan"; 
+    src: url("/Content/fonts/KaushanScript-Regular.otf"); 
+}
+
+@font-face {
+    font-family: "Sinkin Sans"; 
+    src: url("/Content/fonts/SinkinSans-400Regular.otf"); 
+    font-weight: normal; 
+    font-style: normal; 
+}
+@font-face {
+    font-family: "Sinkin Sans"; 
+    src: url("/Content/fonts/SinkinSans-100Thin.otf"); 
+    font-weight: 100; 
+    font-style: normal; 
+}
+
+body {
     background: #333; 
     color: #fff; 
+    font-family: 'Sinkin Sans'; 
+    font-weight: 100; 
 }
 ::selection {
     color: #ecf0f1; 
@@ -17,11 +36,12 @@
     margin: 1em; 
     padding: 1em; 
     font-size: 1.5em;
+    font-family: Kaushan; 
 }
 
 .header h1 {
     font-size: 3em;
-    font-weight: 700;
+    font-family: Kaushan; 
 }
 
 .header ul {
