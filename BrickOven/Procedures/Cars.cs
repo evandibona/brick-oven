@@ -20,12 +20,12 @@ namespace BrickOven.Procedures
         /// <returns>A Dictionary object corresponding to the car returned. </returns>
         public static Dictionary<string, string> Car(string id)
         {
-            var sp = "dbo.GetById";
+            var sp = "dbo.GetCarById";
             var r = new Dictionary<string, string>();
             using (var cx = new SqlConnection(cxSTring))
             {
                 var command = new SqlCommand(sp, cx) { CommandType = CommandType.StoredProcedure };
-                command.Parameters.Add(new SqlParameter("@myId", id));
+                command.Parameters.Add(new SqlParameter("@id", id));
                 using (command)
                 {
                     cx.Open();
@@ -42,7 +42,7 @@ namespace BrickOven.Procedures
             var ps = new Dictionary<string, string> {
                 {"@property", prop}
             };
-            return SpToList("dbo.GetProperty", ps);
+            return SpToList("dbo.eGetProperty", ps);
         }
         public static List<Dictionary<string,string>> CarList(string max, Dictionary<string, string> filter)
         {
@@ -58,8 +58,8 @@ namespace BrickOven.Procedures
                 {"@max", max }, 
                 {"@conditions", whereClause } 
             };
-            var colNames = SpToList("dbo.GetColumns", new Dictionary<string, string>()); 
-            var rows = SpRows("dbo.GetCars", pts);
+            var colNames = SpToList("dbo.eGetColumns", new Dictionary<string, string>()); 
+            var rows = SpRows("dbo.eGetCars", pts);
             var outData = new List<Dictionary<string, string>>(); 
             foreach (var row in rows)
             {
